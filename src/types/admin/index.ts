@@ -76,3 +76,31 @@ export interface ICategoryOption {
   label?: string;
   value?: string;
 }
+
+export interface IDevice {
+  id?: number;
+  factoryId?: number;
+  model?: string;
+  location?: string;
+  ipAddress?: string;
+
+  createdBy?: number;
+  updatedBy?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+}
+
+export interface IHoliday {
+  id?: number;
+  name?: string;
+  startDate?: string;
+  endDate?: string;
+  type?: string;
+
+  createdBy?: number;
+  updatedBy?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+}

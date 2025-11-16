@@ -108,6 +108,9 @@ export type DataTableProps<TData extends WithId> = {
   /** Optional default page size */
   initialPageSize?: number;
 
+  /** Optional default page index (0-based) */
+  initialPageIndex?: number;
+
   /** Optional unique row id accessor (defaults to "id") */
   getRowId?: (row: TData) => string;
 };
@@ -151,6 +154,7 @@ export function DataTable<TData extends WithId>({
   onPaginationChange,
   onSearchChange,
   initialPageSize = 10,
+  initialPageIndex = 0,
   getRowId,
 }: DataTableProps<TData>) {
   const [data, setData] = React.useState<TData[]>(initialData);
@@ -162,7 +166,7 @@ export function DataTable<TData extends WithId>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
-    pageIndex: 0,
+    pageIndex: initialPageIndex,
     pageSize: initialPageSize,
   });
 
@@ -170,6 +174,14 @@ export function DataTable<TData extends WithId>({
   React.useEffect(() => {
     setData(initialData);
   }, [initialData]);
+
+  // Sync pagination state with initial values (important for server-side pagination)
+  React.useEffect(() => {
+    setPagination({
+      pageIndex: initialPageIndex,
+      pageSize: initialPageSize,
+    });
+  }, [initialPageIndex, initialPageSize]);
 
   // dnd sensors
   const sensors = useSensors(
