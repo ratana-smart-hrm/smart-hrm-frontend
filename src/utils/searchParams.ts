@@ -8,7 +8,7 @@ export function getSearchParams({
   pageSize?: string;
   search?: string;
 }) {
-  const page = parseInt(pageIndex ?? "1", 10); // Default to 0 for DataTable (0-based)
+  const page = parseInt(pageIndex ?? "0", 10); // Default to 0 for DataTable (0-based)
   const limit = parseInt(pageSize ?? "10", 10);
   const s = search ?? ""
 

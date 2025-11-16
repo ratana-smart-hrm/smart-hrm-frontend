@@ -1,14 +1,10 @@
-"use client";
-
+"use client";;
 import { DataTable } from "@/components/data-table";
-import { getAllCustomers } from "@/service/admin/customer.service";
 import { queryKeys } from "@/service/util/query-key";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { LoadingOverlay } from "@/components/LoadingOverlay";
-import { useMutateCustomer } from "@/stores/admin/useMutateCustomer";
-import { getAllDevices, getAllHolidays,  } from "@/service/admin/device.service";
+import { getAllHolidays } from "@/service/admin/device.service";
 import { holidayColumns } from "./columns";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -44,14 +40,17 @@ const HolidayClient = ({ initPageIndex, initPageSize }: Props) => {
     pageIndex: number;
     pageSize: number;
   }) => {
+    setPageIndex(pageIndex);
+    setPageSize(pageSize);
     const params = new URLSearchParams(searchParams);
+    // Store 0-based pageIndex in URL for consistency
     params.set("pageIndex", String(pageIndex));
     params.set("pageSize", String(pageSize));
     router.push(`${pathname}?${params.toString()}`);
   };
 
   if (isFetching) {
-    <LoadingOverlay isLoading={isFetching} />;
+    return <LoadingOverlay isLoading={isFetching} />;
   }
 
   return (
@@ -59,10 +58,11 @@ const HolidayClient = ({ initPageIndex, initPageSize }: Props) => {
       <DataTable
         columns={cols}
         data={holidays}
-         pageCount={pagination?.totalPages ?? 0}
+        serverMode={true}
+        pageCount={pagination?.totalPages ?? 0}
         onPaginationChange={handlePaginationChange}
+        initialPageIndex={pageIndex}
         initialPageSize={pageSize}
-
         createLabel="Create"
         onCreateClick={() => {}}
       />

@@ -40,7 +40,9 @@ export const getAllDevices = async (): Promise<IDevicesRes> => {
 export const getAllHolidays = async (pageIndex: number,  pageSize?: number): Promise<IHolidaysRes> => {
   console.log('pageIndex', pageIndex)
   console.log('pageSize', pageSize)
-  const data = await api.get<IApiResponse<IHoliday[]>>(`/holidays?page=${pageIndex}&limit=${pageSize}`);
+  // Convert 0-based pageIndex to 1-based page for API
+  const page = pageIndex + 1;
+  const data = await api.get<IApiResponse<IHoliday[]>>(`/holidays?page=${page}&limit=${pageSize}`);
   return {
     holidays: data.data,
     pagination: data.pagination,

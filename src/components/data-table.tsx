@@ -252,9 +252,10 @@ export function DataTable<TData extends WithId>({
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onPaginationChange: (updater) => {
-      setPagination(updater as any);
+      const newPagination = typeof updater === 'function' ? updater(pagination) : updater;
+      setPagination(newPagination);
       if (serverMode && onPaginationChange) {
-        onPaginationChange(updater as { pageIndex: number; pageSize: number });
+        onPaginationChange(newPagination);
       }
     },
     getCoreRowModel: getCoreRowModel(),

@@ -1,6 +1,5 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,7 +8,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { IconDotsVertical } from "@tabler/icons-react";
-import { ICustomer, IDevice , IHoliday } from "@/types/admin";
+import { IHoliday } from "@/types/admin";
 import { createRowNumberColumn } from "@/components/data-table";
 
 export const holidayColumns = (opts?: {
@@ -21,32 +20,22 @@ export const holidayColumns = (opts?: {
   const cols: ColumnDef<IHoliday>[] = [
     createRowNumberColumn<IHoliday>(),
     {
-
       header: "Name",
       cell: ({ row }) => <div>{row.original.name}</div>,
-      
     },
     {
-
       header: "StartDate",
       cell: ({ row }) => <div>{row.original.startDate}</div>,
-      
     },
     {
-
       header: "EndDate",
       cell: ({ row }) => <div>{row.original.endDate}</div>,
-      
     },
     {
-
       header: "Type",
       cell: ({ row }) => <div>{row.original.type}</div>,
-      
     },
 
-
-    
     // {
     //   header: "Phone",
     //   cell: ({ row }) => (
@@ -57,7 +46,6 @@ export const holidayColumns = (opts?: {
     //   ),
     // },
 
- 
     {
       accessorKey: "createdAt",
       header: "Created",
