@@ -32,4 +32,12 @@ export const queryKeys = {
 
     detail: (id?: number) => ["contractTypes", "detail", id] as const,
   },
+  contracts: {
+    root: ["contracts"] as const,
+
+    list: (pageIndex?: number, pageSize?: number) =>
+      ["contracts", "list", { pageIndex, pageSize }] as const,
+
+    detail: (id?: number) => ["contracts", "detail", id] as const,
+  },
 };

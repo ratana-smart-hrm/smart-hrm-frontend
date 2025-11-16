@@ -18,7 +18,7 @@ export interface ICategory {
   id?: number;
   name?: string;
   isActive?: boolean;
-  
+
   createdBy?: number;
   updatedBy?: number;
   createdAt?: string;
@@ -77,6 +77,27 @@ export interface ICategoryOption {
   value?: string;
 }
 
+export interface IEmployee {
+  id?: number;
+  empCode?: string;
+  firstName?: string;
+  lastName?: string;
+  firstNameKh?: string;
+  lastNameKh?: string;
+  gender?: string;
+  position?: string;
+  joinedDate?: string;
+  status?: string;
+  salary?: string;
+  workingShiftId?: number;
+
+  createdBy?: number;
+  updatedBy?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+}
+
 export interface IDevice {
   id?: number;
   factoryId?: number;
@@ -109,6 +130,26 @@ export interface IContractType {
   id?: number;
   name?: string;
   code?: string;
+
+  createdBy?: number;
+  updatedBy?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+}
+
+export interface IContract {
+  id?: number;
+  employeeId?: number;
+  employee?: IEmployee;
+  contractTypeId?: number;
+  contractType?: IContractType;
+
+  startDate?: string;
+  endDate?: string;
+  baseSalary?: number;
+  contractDetail?: string;
+  isExpired?: boolean;
 
   createdBy?: number;
   updatedBy?: number;

@@ -27,3 +27,19 @@ export const ProductSchema = z.object({
     )
     .min(1, "At least one color is required"),
 });
+
+export const contractFormSchema = z.object({
+  employeeId: z.number().min(1, "Employee is required"),
+  contractTypeId: z.number().min(1, "Contract type is required"),
+
+  startDate: z.string().min(1, "Start date is required"),
+  endDate: z.string().nullable().optional(),
+
+  baseSalary: z.number().min(0, "Base salary is required"),
+
+  contractDetail: z.string().optional(),
+
+  // REQUIRED BOOLEAN (not optional)
+  isExpired: z.boolean().default(false),
+});
+export type ContractFormValues = z.infer<typeof contractFormSchema>;

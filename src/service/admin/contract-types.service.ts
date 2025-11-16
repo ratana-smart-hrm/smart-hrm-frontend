@@ -45,6 +45,14 @@ export const getAllContractTypes = async (
   };
 };
 
+export const getAllContractTypeList = async (): Promise<IContractTypesRes> => {
+  const data = await api.get<IApiResponse<IContractType[]>>(`/contract-types`);
+  return {
+    contractTypes: data.data,
+    pagination: data.pagination,
+  };
+};
+
 export const getContractTypeById = async (
   contractTypeId?: number
 ): Promise<IContractTypeRes> => {
