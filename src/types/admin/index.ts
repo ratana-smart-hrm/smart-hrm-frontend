@@ -104,3 +104,15 @@ export interface IHoliday {
   updatedAt?: string;
   deletedAt?: string;
 }
+
+export interface IContractType {
+  id?: number;
+  name?: string;
+  code?: string;
+
+  createdBy?: number;
+  updatedBy?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+}

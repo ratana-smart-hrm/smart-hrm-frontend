@@ -17,7 +17,19 @@ export const queryKeys = {
     byId: (id?: number) => ["devices", "detail", id ?? "new"],
   },
   holidays: {
-    all: (pageIndex?: number , pageLimit?: number) => ["holidays", pageIndex , pageLimit],
+    all: (pageIndex?: number, pageLimit?: number) => [
+      "holidays",
+      pageIndex,
+      pageLimit,
+    ],
     byId: (id?: number) => ["holidays", "detail", id ?? "new"],
+  },
+  contractTypes: {
+    root: ["contractTypes"] as const,
+
+    list: (pageIndex?: number, pageSize?: number) =>
+      ["contractTypes", "list", { pageIndex, pageSize }] as const,
+
+    detail: (id?: number) => ["contractTypes", "detail", id] as const,
   },
 };
