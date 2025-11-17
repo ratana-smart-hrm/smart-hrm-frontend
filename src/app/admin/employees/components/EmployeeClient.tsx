@@ -5,18 +5,19 @@ import { queryKeys } from "@/service/util/query-key";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { LoadingOverlay } from "@/components/LoadingOverlay";
-import { companyColumns } from "./columns";
+import { employeeColumns } from "./columns";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 import { ConfirmDialog } from "@/components/ConfirmDialog";
-import { ICompany } from "@/types/admin";
-import { getAllCompanies } from "@/service/admin/companies.service";
-import { useMutateCompany } from "@/stores/admin/useMutateCompany";
+import { useMutateEmployee } from "@/stores/admin/useMutateEmployee";
+import { IEmployee } from "@/types/admin";
+import { getAllEmployees } from "@/service/admin/employees.service";
 
 interface Props {
   initPageIndex: number;
   initPageSize: number;
 }
-const CompanyClient = ({ initPageIndex, initPageSize }: Props) => {
+const EmployeeClient = ({ initPageIndex, initPageSize }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -25,38 +26,36 @@ const CompanyClient = ({ initPageIndex, initPageSize }: Props) => {
   const [pageIndex, setPageIndex] = useState(initPageIndex);
   const [pageSize, setPageSize] = useState(initPageSize);
 
-  const [isOpen, setIsOpen] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const [company, setCompany] = useState<ICompany | undefined>(undefined);
+  const [employee, setEmployee] = useState<IEmployee | undefined>(undefined);
 
   const { data, isFetching } = useQuery({
-    queryKey: queryKeys.companies.list(pageIndex, pageSize),
-    queryFn: () => getAllCompanies(pageIndex, pageSize),
+    queryKey: queryKeys.employees.list(pageIndex, pageSize),
+    queryFn: () => getAllEmployees(pageIndex, pageSize),
   });
 
-  const companies = data?.companies ?? [];
+  const employees = data?.employees ?? [];
   const pagination = data?.pagination;
 
-  const cols = companyColumns({
+  const cols = employeeColumns({
     onEdit: (row) => {
-      setIsOpen(true);
-      setCompany(row);
+      router.push(`/admin/employees/${row.id}`);
     },
     onDelete: (row) => {
       setIsDelete(true);
-      setCompany(row);
+      setEmployee(row);
     },
   });
-  const { delete: deleteCompanyMutate } = useMutateCompany();
+  const { delete: deleteEmployeeMutate } = useMutateEmployee();
 
   const handleDelete = async () => {
     setIsLoading(true);
-    await deleteCompanyMutate(
-      { companyId: company?.id },
+    await deleteEmployeeMutate(
+      { employeeId: employee?.id },
       {
         onSuccess: () => {
           setIsDelete(false);
-          setCompany(undefined);
+          setEmployee(undefined);
         },
         onSettled: () => {
           setIsLoading(false);
@@ -86,23 +85,12 @@ const CompanyClient = ({ initPageIndex, initPageSize }: Props) => {
 
   return (
     <div>
-      {isOpen && (
-        <CompanyDialog
-          isOpen={isOpen}
-          setIsOpen={() => {
-            setIsOpen(false);
-            setCompany(undefined);
-          }}
-          companyId={company?.id}
-        />
-      )}
-
       {isDelete && (
         <ConfirmDialog
           open={isDelete}
           onOpenChange={setIsDelete}
-          title="Delete Category"
-          description={`This will remove the ${company?.name}`}
+          title="Delete Employee"
+          description={`This will remove employee name ${employee?.lastName} ${employee?.firstName}`}
           loading={isLoading}
           onConfirm={handleDelete}
         />
@@ -110,7 +98,7 @@ const CompanyClient = ({ initPageIndex, initPageSize }: Props) => {
 
       <DataTable
         columns={cols}
-        data={companies}
+        data={employees}
         serverMode={true}
         pageCount={pagination?.totalPages ?? 0}
         onPaginationChange={handlePaginationChange}
@@ -118,11 +106,11 @@ const CompanyClient = ({ initPageIndex, initPageSize }: Props) => {
         initialPageSize={pageSize}
         createLabel="Create"
         onCreateClick={() => {
-          setIsOpen(true);
+          router.push("/admin/employees/new");
         }}
       />
     </div>
   );
 };
 
-export default CompanyClient;
+export default EmployeeClient;

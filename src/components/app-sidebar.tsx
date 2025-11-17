@@ -40,8 +40,8 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "Categories",
-          url: "/admin/categories",
+          title: "Employees",
+          url: "/admin/employees",
         },
         {
           title: "Products",

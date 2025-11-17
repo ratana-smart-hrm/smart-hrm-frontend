@@ -206,3 +206,22 @@ export interface ICompany {
   updatedAt?: string;
   deletedAt?: string;
 }
+
+export interface IEmployee {
+  id?: number;
+  empCode?: string;
+  firstName?: string;
+  lastName?: string;
+  firstNameKh?: string;
+  gender?: string;
+  position?: string;
+  joinedDate?: string;
+  status?: string;
+  salary?: string
+
+  createdBy?: number;
+  updatedBy?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+}
