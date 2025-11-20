@@ -12,6 +12,8 @@ import { IHoliday } from "@/types/admin";
 import { useMutateHoliday } from "@/stores/admin/useMutateHoliday";
 import HolidayDialog from "./HolidayDialog";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { Button } from "@/components/ui/button";
+import { DownloadIcon } from "lucide-react";
 
 interface Props {
   initPageIndex: number;
@@ -148,6 +150,15 @@ const HolidayClient = ({ initPageIndex, initPageSize }: Props) => {
         onCreateClick={() => {
           setIsForm(true);
         }}
+        extractAction={
+          <Button
+            className="bg-cyan-500 hover:bg-cyan-400 cursor-pointer"
+            onClick={() => {}}
+          >
+            <DownloadIcon className="h-3 w-3" />
+            Import
+          </Button>
+        }
       />
     </div>
   );

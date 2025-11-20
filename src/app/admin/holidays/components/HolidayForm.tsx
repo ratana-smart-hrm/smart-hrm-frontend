@@ -90,7 +90,9 @@ export default function HolidayForm({ initialData, onSuccess }: Props) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>
+                Name<span className="text-red-500">*</span>
+              </FormLabel>
               <FormControl>
                 <Input placeholder="Enter name" type="text" {...field} />
               </FormControl>
@@ -141,7 +143,7 @@ export default function HolidayForm({ initialData, onSuccess }: Props) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Holiday Type <span className="text-red-500">*</span>
+                    Holiday Type<span className="text-red-500">*</span>
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
