@@ -24,24 +24,6 @@ export const InfiniteMovingCards = ({
   const scrollerRef = React.useRef<HTMLUListElement>(null);
   const [start, setStart] = useState(false);
 
-  useEffect(() => {
-    addAnimation();
-  }, []);
-
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        scrollerRef.current?.appendChild(duplicatedItem);
-      });
-
-      setAnimationDirection();
-      setAnimationSpeed();
-      setStart(true);
-    }
-  }
-
   function setAnimationDirection() {
     if (!containerRef.current) return;
     containerRef.current.style.setProperty(
@@ -60,6 +42,26 @@ export const InfiniteMovingCards = ({
       containerRef.current.style.setProperty("--animation-duration", "80s");
     }
   }
+
+  function addAnimation() {
+    if (containerRef.current && scrollerRef.current) {
+      const scrollerContent = Array.from(scrollerRef.current.children);
+      scrollerContent.forEach((item) => {
+        const duplicatedItem = item.cloneNode(true);
+        scrollerRef.current?.appendChild(duplicatedItem);
+      });
+
+      setAnimationDirection();
+      setAnimationSpeed();
+      queueMicrotask(() => {
+        setStart(true);
+      });
+    }
+  }
+
+  useEffect(() => {
+    addAnimation();
+  }, []);
 
   return (
     <div

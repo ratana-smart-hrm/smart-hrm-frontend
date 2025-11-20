@@ -320,6 +320,8 @@ export const FileInput = forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   const { dropzoneState, isFileTooBig, isLOF } = useFileUpload();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   const rootProps = isLOF ? {} : dropzoneState.getRootProps();
   return (
     <div
@@ -346,7 +348,7 @@ export const FileInput = forwardRef<
         {children}
       </div>
       <Input
-        ref={dropzoneState.inputRef}
+        ref={inputRef}
         disabled={isLOF}
         {...dropzoneState.getInputProps()}
         className={`${isLOF ? "cursor-not-allowed" : ""}`}

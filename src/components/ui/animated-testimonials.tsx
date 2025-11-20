@@ -23,7 +23,9 @@ export const AnimatedTestimonials = ({
 
   // ✅ Generate random rotations only on the client
   useEffect(() => {
-    setRotations(testimonials.map(() => Math.floor(Math.random() * 21) - 10));
+    queueMicrotask(() => {
+      setRotations(testimonials.map(() => Math.floor(Math.random() * 21) - 10));
+    });
   }, [testimonials]);
 
   const handleNext = () => {

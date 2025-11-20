@@ -44,7 +44,7 @@ export const useMutateContractType = () => {
     }) => {
       return await updateContractType(contractTypeId, request);
     },
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       toast.success(`${RESOURCE} updated successfully`);
 
       contractTypeCache.clearAll(queryClient);
@@ -58,7 +58,7 @@ export const useMutateContractType = () => {
     mutationFn: async ({ contractTypeId }: { contractTypeId?: number }) => {
       return await deleteContractType(contractTypeId);
     },
-    onSuccess: (_) => {
+    onSuccess: () => {
       toast.success(`${RESOURCE} deleted successfully`);
 
       contractTypeCache.clearAll(queryClient);

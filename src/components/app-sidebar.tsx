@@ -5,7 +5,6 @@ import {
   BookTextIcon,
   Bot,
   GalleryVerticalEnd,
-  Settings2,
   SettingsIcon,
   SquareTerminal,
 } from "lucide-react";

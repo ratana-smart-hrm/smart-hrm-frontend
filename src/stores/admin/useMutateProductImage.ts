@@ -37,7 +37,6 @@ export const useMutateProductImage = () => {
 
   const deleteBulkMutation = useMutation({
     mutationFn: async ({
-      productId,
       request,
     }: {
       productId?: number;

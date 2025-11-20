@@ -40,7 +40,7 @@ export const useMutateLeaveType = () => {
     }) => {
       return await updateLeaveType(leaveTypeId, request);
     },
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       toast.success(`${RESOURCE} updated successfully`);
 
       leaveTypeCache.clearAll(queryClient);
@@ -54,7 +54,7 @@ export const useMutateLeaveType = () => {
     mutationFn: async ({ leaveTypeId }: { leaveTypeId?: number }) => {
       return await deleteLeaveType(leaveTypeId);
     },
-    onSuccess: (_) => {
+    onSuccess: () => {
       toast.success(`${RESOURCE} deleted successfully`);
 
       leaveTypeCache.clearAll(queryClient);

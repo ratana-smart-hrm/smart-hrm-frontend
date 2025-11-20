@@ -1,18 +1,15 @@
 "use client";
-
 import { Separator } from "@/components/ui/separator";
 import { Save } from "lucide-react";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ProductForm from "./ProductForm";
 import { Button } from "@/components/ui/button";
-import { getQueryClient } from "@/lib/query-client";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@/service/util/query-key";
 import { getProductById } from "@/service/admin/product.service";
 import { getAllCategories } from "@/service/admin/category.service";
 import { LoadingOverlay } from "@/components/LoadingOverlay";
 import Heading from "@/components/Heading";
-import { ICategoryOption } from "@/types/admin";
 
 interface Props {
   productId?: string;
@@ -34,7 +31,7 @@ const ProductIdClient = ({ productId }: Props) => {
   const product = data?.product ?? null;
   const categories = dataCategories?.categories ?? [];
 
-  const categoryOptions= categories.map((cat) => ({
+  const categoryOptions = categories.map((cat) => ({
     label: cat.name,
     value: String(cat.id),
   }));

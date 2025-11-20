@@ -16,9 +16,9 @@ export interface IDeviceRes {
   device?: IDevice;
 }
 
-export interface ICreateDeviceRequest extends IDevice {}
+export type ICreateDeviceRequest = IDevice;
 
-export interface IUpdateDeviceRequest {}
+export type IUpdateDeviceRequest = IDevice;
 
 export const getAllDevices = async (
   pageIndex: number,

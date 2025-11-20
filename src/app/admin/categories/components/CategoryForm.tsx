@@ -2,7 +2,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -17,6 +16,7 @@ import { Switch } from "@/components/ui/switch";
 import { ICategory } from "@/types/admin";
 import { useMutateCategory } from "@/stores/admin/useMutateCategory";
 import { useState } from "react";
+import { LoadingButton } from "@/components/LoadingButton";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -106,7 +106,9 @@ export default function CategoryForm({ initialData, onSuccess }: Props) {
           )}
         />
 
-        <Button type="submit">{isEdit ? "Save" : "Create"}</Button>
+        <LoadingButton loading={isLoading} type="submit">
+          {isEdit ? "Save" : "Create"}
+        </LoadingButton>
       </form>
     </Form>
   );

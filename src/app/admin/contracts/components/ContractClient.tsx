@@ -1,5 +1,4 @@
 "use client";
-
 import { DataTable } from "@/components/data-table";
 import { queryKeys } from "@/service/util/query-key";
 import { useQuery } from "@tanstack/react-query";
@@ -12,8 +11,6 @@ import { useMutateContract } from "@/stores/admin/useMutateContract";
 import { IContract } from "@/types/admin";
 import { getAllContracts } from "@/service/admin/contracts.service";
 import { contractColumns } from "./columns";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Image from "next/image";
 import { DashboardCard } from "@/components/DashboardCard";
 
 interface Props {

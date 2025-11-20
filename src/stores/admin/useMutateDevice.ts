@@ -52,7 +52,7 @@ export const useMutateDevice = () => {
     }) => {
       return await updateDevice(deviceId, request);
     },
-    onSuccess: (_, { deviceId }) => {
+    onSuccess: () => {
       toast.success(`${RESOURCE} updated successfully`);
 
       deviceCache.clearAll(queryClient);
